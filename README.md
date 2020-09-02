@@ -74,6 +74,21 @@ For demo use the sample demo-angular project.
 $ cd demo-angular
 $ tns debug android/ios
 ```
+## Issues
+
+```vim
+AAPT: error: attribute android:requestLegacyExternalStorage not found.
+```
+
+### Solution
+
+Add in your App_Resources/Android/app.gradle a line ```compileSdkVersion 29```
+
+```vim
+android {
+  compileSdkVersion 29
+  defaultConfig {
+```
 
 ## Contribute
 We love PRs! Check out the [contributing guidelines](CONTRIBUTING.md). If you want to contribute, but you are not sure where to start - look for [issues labeled `help wanted`](https://github.com/NativeScript/nativescript-plugin-filepicker/issues?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22).
