@@ -39,6 +39,12 @@
 		"name": "Your Name",
 		"email": "youremail@yourdomain.com"
 	},
+	"contributors": [
+		{
+			"name": "Tiago Alves",
+			"email": "tralves@gmail.com"
+		}
+	],
 	"bugs": {
 		"url": "https://github.com/prabudevarrajan/nativescript-plugin-filepicker/issues"
 	},
