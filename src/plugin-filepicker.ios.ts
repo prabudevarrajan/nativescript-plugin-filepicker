@@ -1,11 +1,12 @@
-import * as data_observable from "tns-core-modules/data/observable";
-import * as imageAssetModule from "tns-core-modules/image-asset";
+import {
+    View,
+    Observable,
+    Utils,
+} from "@nativescript/core";
 import { Options } from "./plugin-filepicker.common";
-import { View } from "tns-core-modules/ui/core/view/view";
-import * as utils from "tns-core-modules/utils/utils";
 export * from "./plugin-filepicker.common";
 
-export class FilePicker extends data_observable.Observable {
+export class FilePicker extends Observable {
     _filePickerController: UIDocumentPickerViewController;
     _hostView: View;
 
@@ -69,7 +70,7 @@ export class FilePicker extends data_observable.Observable {
     present() {
         console.log("present...");
         return new Promise<void>((resolve, reject) => {
-            let documentTypes = utils.ios.collections.jsArrayToNSArray(this.mimeTypeFromExtensions);
+            let documentTypes = Utils.ios.collections.jsArrayToNSArray(this.mimeTypeFromExtensions);
 
 
             let controller = UIDocumentPickerViewController.alloc().initWithDocumentTypesInMode(documentTypes, UIDocumentPickerMode.Import);
@@ -91,7 +92,7 @@ export class FilePicker extends data_observable.Observable {
     }
 }
 
-
+@NativeClass()
 class MediafilepickerDocumentPickerDelegate extends NSObject implements UIDocumentPickerDelegate {
     _resolve: any;
     _reject: any;

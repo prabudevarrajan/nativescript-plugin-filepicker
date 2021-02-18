@@ -7,9 +7,16 @@ For iOS, it uses stock UIDocumentPickerViewController for picking the file.
 
 ## Installation
 
+### NativeScript 7+:
 
-```javascript
-tns plugin add nativescript-plugin-filepicker
+```bash
+ns plugin add nativescript-plugin-filepicker
+```
+
+### NativeScript prior to 7:
+
+```bash
+tns plugin add nativescript-plugin-filepicker@1.0.0
 ```
 
 ## Usage
