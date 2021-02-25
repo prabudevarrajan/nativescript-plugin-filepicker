@@ -1,16 +1,20 @@
 import {
     View,
-    Observable,
     Utils,
 } from "@nativescript/core";
 import { Options } from "./plugin-filepicker.common";
 export * from "./plugin-filepicker.common";
 
-export class FilePicker extends Observable {
+export class FilePicker {
     _filePickerController: UIDocumentPickerViewController;
     _hostView: View;
 
     private _options: Options;
+
+    constructor(options: Options = {}, hostView: View) {
+        this._options = options;
+        this._hostView = hostView;
+    }
 
     // lazy-load latest frame.topmost() if _hostName is not used
     get hostView() {
@@ -31,13 +35,6 @@ export class FilePicker extends Observable {
 
     get mode(): string {
         return this._options && this._options.mode && this._options.mode.toLowerCase() === 'single' ? 'single' : 'multiple';
-    }
-
-    constructor(options: Options = {}, hostView: View) {
-        super();
-        this._options = options;
-        this._hostView = hostView;
-
     }
 
     authorize(): Promise<void> {
