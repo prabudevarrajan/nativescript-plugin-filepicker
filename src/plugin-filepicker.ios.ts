@@ -1,15 +1,20 @@
-import * as data_observable from "tns-core-modules/data/observable";
-import * as imageAssetModule from "tns-core-modules/image-asset";
+import {
+    View,
+    Utils,
+} from "@nativescript/core";
 import { Options } from "./plugin-filepicker.common";
-import { View } from "tns-core-modules/ui/core/view/view";
-import * as utils from "tns-core-modules/utils/utils";
 export * from "./plugin-filepicker.common";
 
-export class FilePicker extends data_observable.Observable {
+export class FilePicker {
     _filePickerController: UIDocumentPickerViewController;
     _hostView: View;
 
     private _options: Options;
+
+    constructor(options: Options = {}, hostView: View) {
+        this._options = options;
+        this._hostView = hostView;
+    }
 
     // lazy-load latest frame.topmost() if _hostName is not used
     get hostView() {
@@ -30,13 +35,6 @@ export class FilePicker extends data_observable.Observable {
 
     get mode(): string {
         return this._options && this._options.mode && this._options.mode.toLowerCase() === 'single' ? 'single' : 'multiple';
-    }
-
-    constructor(options: Options = {}, hostView: View) {
-        super();
-        this._options = options;
-        this._hostView = hostView;
-
     }
 
     authorize(): Promise<void> {
@@ -69,7 +67,7 @@ export class FilePicker extends data_observable.Observable {
     present() {
         console.log("present...");
         return new Promise<void>((resolve, reject) => {
-            let documentTypes = utils.ios.collections.jsArrayToNSArray(this.mimeTypeFromExtensions);
+            let documentTypes = Utils.ios.collections.jsArrayToNSArray(this.mimeTypeFromExtensions);
 
 
             let controller = UIDocumentPickerViewController.alloc().initWithDocumentTypesInMode(documentTypes, UIDocumentPickerMode.Import);
@@ -91,7 +89,7 @@ export class FilePicker extends data_observable.Observable {
     }
 }
 
-
+@NativeClass()
 class MediafilepickerDocumentPickerDelegate extends NSObject implements UIDocumentPickerDelegate {
     _resolve: any;
     _reject: any;

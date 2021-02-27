@@ -1,5 +1,4 @@
-import * as application from "tns-core-modules/application";
-import * as imageAssetModule from "tns-core-modules/image-asset";
+import { Application } from "@nativescript/core";
 import * as permissions from "nativescript-permissions";
 
 import { Options } from "./plugin-filepicker.common";
@@ -10,7 +9,7 @@ class UriHelper {
         let DocumentsContract = (<any>android.provider).DocumentsContract;
         let isKitKat = android.os.Build.VERSION.SDK_INT >= 19; // android.os.Build.VERSION_CODES.KITKAT
 
-        if (isKitKat && DocumentsContract.isDocumentUri(application.android.context, uri)) {
+        if (isKitKat && DocumentsContract.isDocumentUri(Application.android.context, uri)) {
             let docId, id, type;
             let contentUri: android.net.Uri = null;
 
@@ -131,7 +130,7 @@ class UriHelper {
     }
 
     private static getContentResolver(): android.content.ContentResolver {
-        return application.android.nativeApp.getContentResolver();
+        return Application.android.nativeApp.getContentResolver();
     }
 }
 
